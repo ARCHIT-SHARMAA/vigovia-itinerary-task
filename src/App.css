@@ -1,3 +1,5 @@
+/* src/App.css */
+/* Styles for the responsive preview container */
 .itinerary-preview {
   display: none;
 }
@@ -5,6 +7,27 @@
 @media (min-width: 1024px) {
   .itinerary-preview {
     display: block;
-    max-height: calc(100vh - 4rem);
+    max-height: calc(100vh - 4rem); /* Ensure it fits the screen height */
   }
+}
+
+/* --- FORCED PAGE BREAKS FOR PDF GENERATION (CRITICAL FIX) --- */
+/* This specific class targets elements that must start on a new page */
+@media print {
+    .print-new-page {
+        page-break-before: always;
+        break-before: page;
+        /* Adding extra margin to reinforce the break */
+        margin-top: 100px; 
+    }
+}
+
+
+/* Hide scrollbars for a clean PDF look */
+.itinerary-preview::-webkit-scrollbar {
+    display: none;
+}
+.itinerary-preview {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }

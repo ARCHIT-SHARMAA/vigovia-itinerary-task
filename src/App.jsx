@@ -36,6 +36,7 @@ function App() {
         { point: 'Trip Insurance', details: 'Highly recommended for travel protection and medical emergencies.' },
     ],
     serviceScope: [
+        { service: 'Flight Tickets and Hotel Vouchers', details: 'Delivered 3 Days Post Full Payment' },
         { service: 'Support', details: 'Chat Support – Response Time: 4 Hours' },
         { service: 'Cancellation Support', details: 'Provided' },
     ],
@@ -98,6 +99,7 @@ function App() {
     const input = itineraryRef.current;
     if (input) {
       setTimeout(() => {
+        // Use a higher scale and useCORS for better image quality and handling placeholders
         html2canvas(input, { scale: 3, useCORS: true }).then((canvas) => {
           const imgData = canvas.toDataURL('image/png');
           const pdf = new jsPDF('p', 'mm', 'a4');
@@ -125,8 +127,6 @@ function App() {
 
   // Custom Daily Itinerary Component (Replicating the Figma visual timeline)
   const DailyItinerary = ({ day, date, city, morning, afternoon, evening }) => {
-    // Note: The original Figma uses hardcoded date names for days 1-4, 
-    // but this dynamic component uses the actual date logic.
     const formattedDate = new Date(date).toLocaleDateString('en-US', { day: '2-digit', month: 'long' });
     const imagePlaceholder = `https://placehold.co/100x100/A387E9/ffffff?text=Day+${day}`;
 
@@ -301,7 +301,7 @@ function App() {
                 </div>
             </div>
 
-            {/* --- FLIGHT SUMMARY TABLE --- */}
+            {/* Flight Summary Table (Break after this if content is long) */}
             <h3 className="text-lg font-bold mb-4 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1">Flight Summary</h3>
             <div className="shadow-lg rounded-lg overflow-hidden mb-8">
                 <div className="grid grid-cols-5 text-xs font-bold text-white bg-indigo-900 text-center">
@@ -322,7 +322,7 @@ function App() {
                 ))}
             </div>
 
-            {/* Hotel Bookings Table (Matching Figma 5-Column Style) */}
+            {/* Hotel Bookings Table */}
             <h3 className="text-lg font-bold mb-4 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1">Hotel Bookings</h3>
             <div className="shadow-lg rounded-lg overflow-hidden mb-8">
                 <div className="grid grid-cols-5 text-xs font-bold text-white bg-indigo-900 text-center">
@@ -344,7 +344,7 @@ function App() {
             </div>
 
 
-            {/* Daily Activity Plan (From SS 1) */}
+            {/* Daily Activity Plan */}
             <h3 className="text-lg font-bold mb-4 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1">Daily Activities</h3>
             <div className='mb-8'>
                 {formData.activityPlans.map((activity, index) => (
@@ -353,7 +353,7 @@ function App() {
             </div>
 
             {/* Activity Table (From SS 4) */}
-            <h3 className="text-lg font-bold mb-4 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1">Activity Table</h3>
+            <h3 className="text-lg font-bold mb-4 pt-16 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1 print-new-page">Activity Table</h3>
             <div className="shadow-lg rounded-lg overflow-hidden mb-8">
                 <div className="grid grid-cols-4 text-sm font-bold text-white bg-indigo-900">
                     <div className="p-3">City</div>
@@ -373,7 +373,7 @@ function App() {
 
 
             {/* Inclusion Summary (From SS 3) */}
-            <h3 className="text-lg font-bold mb-4 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1">Inclusion Summary</h3>
+            <h3 className="text-lg font-bold mb-4 pt-16 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1 print-new-page">Inclusion Summary</h3>
             <div className="shadow-lg rounded-lg overflow-hidden mb-8">
                 <div className="grid grid-cols-4 text-sm font-bold text-white bg-indigo-900">
                     <div className="p-3">Category</div>
@@ -391,7 +391,7 @@ function App() {
 
 
             {/* Important Notes Table (From SS 2) */}
-            <h3 className="text-lg font-bold mb-4 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1">Important Notes</h3>
+            <h3 className="text-lg font-bold mb-4 pt-16 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1 print-new-page">Important Notes</h3>
             <div className="shadow-lg rounded-lg overflow-hidden mb-8">
                 <div className="grid grid-cols-5 text-sm font-bold text-white bg-indigo-900">
                     <div className="col-span-1 p-3">Point</div>
@@ -406,7 +406,7 @@ function App() {
             </div>
             
             {/* Scope of Service Table (From SS 3) */}
-            <h3 className="text-lg font-bold mb-4 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1">Scope of Service</h3>
+            <h3 className="text-lg font-bold mb-4 pt-16 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1 print-new-page">Scope of Service</h3>
             <div className="shadow-lg rounded-lg overflow-hidden mb-8">
                 <div className="grid grid-cols-5 text-sm font-bold text-white bg-indigo-900">
                     <div className="col-span-1 p-3">Service</div>
@@ -421,7 +421,7 @@ function App() {
             </div>
             
             {/* Payment Plan (From SS 5) */}
-            <h3 className="text-lg font-bold mb-4 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1">Payment Plan</h3>
+            <h3 className="text-lg font-bold mb-4 pt-16 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1 print-new-page">Payment Plan</h3>
             <PaymentRibbon title="Total Amount" value={`${formData.totalAmount} For ${formData.travellers} Pax (Inclusive Of GST)`} />
             <PaymentRibbon title="TCS" value={formData.tcsCollected} />
 
@@ -439,7 +439,7 @@ function App() {
             </div>
             
             {/* Visa Details (From SS 5) */}
-            <h3 className="text-lg font-bold mb-4 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1">Visa Details</h3>
+            <h3 className="text-lg font-bold mb-4 pt-16 text-indigo-800 uppercase border-b-2 border-indigo-200 pb-1 print-new-page">Visa Details</h3>
             <div className="flex justify-between p-4 border rounded-lg shadow-sm mb-8">
                 <span className="font-semibold">Visa Type: <span className="font-normal text-gray-700">{formData.visaType}</span></span>
                 <span className="font-semibold">Validity: <span className="font-normal text-gray-700">{formData.visaValidity}</span></span>
