@@ -1,0 +1,10 @@
+.itinerary-preview {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .itinerary-preview {
+    display: block;
+    max-height: calc(100vh - 4rem);
+  }
+}
