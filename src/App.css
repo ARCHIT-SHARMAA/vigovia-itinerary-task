@@ -1,4 +1,12 @@
 /* src/App.css */
+/* Custom radial gradient for a polished background */
+body {
+    /* Using a softer, travel-themed gradient */
+    background: radial-gradient(circle at top left, #f3f4f6, #e0e7ff 50%, #f3f4f6 100%);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+}
+
 /* Styles for the responsive preview container */
 .itinerary-preview {
   display: none;
@@ -12,12 +20,11 @@
 }
 
 /* --- FORCED PAGE BREAKS FOR PDF GENERATION (CRITICAL FIX) --- */
-/* This specific class targets elements that must start on a new page */
+/* This ensures section titles do not get cut off between pages */
 @media print {
     .print-new-page {
         page-break-before: always;
         break-before: page;
-        /* Adding extra margin to reinforce the break */
         margin-top: 100px; 
     }
 }
